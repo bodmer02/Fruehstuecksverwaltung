@@ -26,9 +26,14 @@
           </thead>
           <tbody>
           <tr>
-            <td><input placeholder="Bitte ausfüllen" /></td>
-            <td><input placeholder="Bitte ausfüllen" /></td>
-            <td><input placeholder="Bitte ausfüllen" /></td>
+            <td>Name aus Datenbank</td>
+            <td>Produkt aus Datenbank</td>
+            <td>Preis aus Datenbank</td>
+          </tr>
+          <tr>
+            <td><input v-model="name" placeholder="Bitte ausfüllen" /></td>
+            <td><input v-model="product" placeholder="Bitte ausfüllen" /></td>
+            <td><input v-model.number="price" placeholder="Bitte ausfüllen" /></td>
           </tr>
           </tbody>
         </v-table>
@@ -36,8 +41,8 @@
     </v-row>
     <v-row>
       <v-col>
-        <button>
-          Hinzufügen
+        <button @click="addBreakfast">
+          {{ t("views.getStarted.table.add")}}
         </button>
       </v-col>
     </v-row>
@@ -59,12 +64,20 @@ import YesNoDialog from "@/components/common/YesNoDialog.vue";
 import { useSaveLeave } from "@/composables/saveLeave";
 
 const { t } = useI18n();
+const name = ref("");
+const product = ref("");
+const price = ref(null);
 
 const documentationClicked = ref(false);
 const { cancel, leave, saveLeaveDialog } = useSaveLeave(isDirty);
 
 function isDirty(): boolean {
   return !documentationClicked.value;
+}
+function addBreakfast(){
+  name.value = "";
+  product.value = "";
+  price.value = null;
 }
 </script>
 <style>

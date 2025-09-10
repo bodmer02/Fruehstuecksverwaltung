@@ -60,6 +60,7 @@ onMounted(() => {
 
 button {
   margin-top: 5rem;
+  margin-left: 0rem;
   padding: 2rem 4rem;
   background: grey;
   color: white;
