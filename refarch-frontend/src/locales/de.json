@@ -9,10 +9,10 @@
   },
   "app": {
     "name": {
-      "part1": "RefArch-",
-      "part2": "Kick",
+      "part1": "Frühstücksverwaltungs",
+      "part2": "-Programm",
       "part3": "Starter",
-      "full": "@:app.name.part1@:app.name.part2@:app.name.part3"
+      "full": "@:app.name.part1@:app.name.part2"
     },
     "search": "Suche"
   },
@@ -23,9 +23,9 @@
       "apiGatewayStatus": "Das API-Gateway ist:"
     },
     "getStarted": {
-      "navText": "Erste Schritte",
-      "docsHeader": "Dokumentation",
-      "docsSubtext": "Weiterführende Links sind hier zu finden:",
+      "navText": "Frühstücksplaner",
+      "docsHeader": "Frühstücksplaner",
+      "docsSubtext": "Essensübersicht",
       "docsLinks": {
         "templates": "Dokumentation RefArch-Templates",
         "main": "Dokumentation RefArch"
@@ -33,6 +33,12 @@
       "saveLeave": {
         "title": "Wirklich verlassen?",
         "text": "Wollen Sie wirklich nicht die Dokumentation anschauen?"
+      },
+      "table": {
+        "name": "Name",
+        "product": "Produkt",
+        "price": "Preis",
+        "add": "Hinzufügen"
       }
     }
   },

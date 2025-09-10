@@ -17,6 +17,11 @@
           {{ t("views.home.apiGatewayStatus") }}
           <span :class="status">{{ status }}</span>
         </p>
+        <router-link to="/getstarted">
+          <button>
+            Zur Frühstücksplanung
+          </button>
+        </router-link>
       </v-col>
     </v-row>
   </v-container>
@@ -51,5 +56,13 @@ onMounted(() => {
 
 .DOWN {
   color: lightcoral;
+}
+
+button {
+  margin-top: 5rem;
+  padding: 2rem 4rem;
+  background: grey;
+  color: white;
+  border-radius: 4px;
 }
 </style>

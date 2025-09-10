@@ -15,3 +15,10 @@ changes:
       clientRole: true
       clientId: local
       composite: false
+
+  - addRole:
+        name: tester
+        description: Example role with test access to application data
+        clientRole: true
+        clientId: local
+        composite: false

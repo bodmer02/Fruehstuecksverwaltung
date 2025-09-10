@@ -6,24 +6,39 @@
           {{ t("views.getStarted.docsHeader") }}
         </h1>
         <h3>{{ t("views.getStarted.docsSubtext") }}</h3>
-        <div>
-          <a
-            href="https://refarch.oss.muenchen.de/templates"
-            target="_blank"
-            rel="noopener noreferrer"
-            @click="documentationClicked = true"
-            >{{ t("views.getStarted.docsLinks.templates") }}</a
-          >
-        </div>
-        <div>
-          <a
-            href="https://refarch.oss.muenchen.de/"
-            target="_blank"
-            rel="noopener noreferrer"
-            @click="documentationClicked = true"
-            >{{ t("views.getStarted.docsLinks.main") }}</a
-          >
-        </div>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-table>
+          <thead>
+          <tr>
+          <th>
+            {{ t("views.getStarted.table.name")}}
+          </th>
+          <th>
+            {{ t("views.getStarted.table.product")}}
+          </th>
+          <th>
+            {{ t("views.getStarted.table.price")}}
+          </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><input placeholder="Bitte ausfüllen" /></td>
+            <td><input placeholder="Bitte ausfüllen" /></td>
+            <td><input placeholder="Bitte ausfüllen" /></td>
+          </tr>
+          </tbody>
+        </v-table>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <button>
+          Hinzufügen
+        </button>
       </v-col>
     </v-row>
     <yes-no-dialog
@@ -52,3 +67,21 @@ function isDirty(): boolean {
   return !documentationClicked.value;
 }
 </script>
+<style>
+table {
+  margin-top: 5rem;
+  padding: 2rem 4rem;
+  background: lightgrey;
+  color: black;
+  border-radius: 4px;
+}
+
+button {
+  margin-top: 2rem;
+  margin-left: 103rem;
+  padding: 0.5rem 1rem;
+  background: grey;
+  color: white;
+  border-radius: 4px;
+}
+</style>
