@@ -41,18 +41,16 @@
     </v-row>
     <v-row>
       <v-col>
-        <button @click="addBreakfast">
+        <button class="button-right" @click="addBreakfast">
           {{ t("views.getStarted.table.add")}}
         </button>
+        <router-link to="/invoice">
+        <button class="button-middle">
+          Zur Abrechnung
+        </button>
+        </router-link>
       </v-col>
     </v-row>
-    <yes-no-dialog
-      v-model="saveLeaveDialog"
-      :dialogtitle="t('views.getStarted.saveLeave.title')"
-      :dialogtext="t('views.getStarted.saveLeave.text')"
-      @no="cancel"
-      @yes="leave"
-    />
   </v-container>
 </template>
 
@@ -60,24 +58,29 @@
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 
-import YesNoDialog from "@/components/common/YesNoDialog.vue";
-import { useSaveLeave } from "@/composables/saveLeave";
 
 const { t } = useI18n();
 const name = ref("");
 const product = ref("");
 const price = ref(null);
+const savedName = ref("");
+const savedProduct = ref("");
+const savedPrice = ref (null);
 
-const documentationClicked = ref(false);
-const { cancel, leave, saveLeaveDialog } = useSaveLeave(isDirty);
 
-function isDirty(): boolean {
-  return !documentationClicked.value;
-}
 function addBreakfast(){
-  name.value = "";
-  product.value = "";
-  price.value = null;
+  if(name.value != "" && product.value != "" && price.value != null){
+    savedName.value = name.value;
+    savedProduct.value = product.value;
+    savedPrice.value = price.value;
+
+    name.value = "";
+    product.value = "";
+    price.value = null;
+
+    return savedName; //Eingegebene Daten an Datenbank weiterleiten
+  }
+  return alert("Bitte alle Felder befüllen.");
 }
 </script>
 <style>
@@ -89,10 +92,19 @@ table {
   border-radius: 4px;
 }
 
-button {
+.button-right {
   margin-top: 2rem;
-  margin-left: 103rem;
+  margin-left: 50rem;
   padding: 0.5rem 1rem;
+  background: grey;
+  color: white;
+  border-radius: 4px;
+}
+
+.button-middle {
+  margin-top: 5rem;
+  margin-left: 50rem;
+  padding: 1rem 2rem;
   background: grey;
   color: white;
   border-radius: 4px;

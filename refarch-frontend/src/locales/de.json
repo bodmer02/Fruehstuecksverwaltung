@@ -19,6 +19,7 @@
   "components": {},
   "views": {
     "home": {
+      "navText": "Startseite",
       "header": "Willkommen beim @:app.name.full von it{'@'}M",
       "apiGatewayStatus": "Das API-Gateway ist:"
     },
@@ -40,6 +41,10 @@
         "price": "Preis",
         "add": "Hinzufügen"
       }
+    },
+    "invoice": {
+      "navText": "Abrechnung",
+      "euros": "Euros"
     }
   },
   "domain": {}
