@@ -26,9 +26,9 @@
           </thead>
           <tbody>
           <tr>
-            <td>Name aus Datenbank</td>
-            <td>Produkt aus Datenbank</td>
-            <td>Preis aus Datenbank</td>
+            <td>{{savedName}}</td>
+            <td>{{savedProduct}}</td>
+            <td>{{savedPrice}}</td>
           </tr>
           <tr>
             <td><input v-model="name" placeholder="Bitte ausfüllen" /></td>
@@ -57,7 +57,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
-
+import { addBreakfast as saveBreakfast } from "@/api/breakfast";
 
 const { t } = useI18n();
 const name = ref("");
@@ -65,11 +65,16 @@ const product = ref("");
 const price = ref(null);
 const savedName = ref("");
 const savedProduct = ref("");
-const savedPrice = ref (null);
+const savedPrice = ref(null);
 
 
-function addBreakfast(){
-  if(name.value != "" && product.value != "" && price.value != null){
+async function addBreakfast(){
+  if(name.value !== "" && product.value !== "" && price.value !== null){
+    await saveBreakfast({
+      name: name.value,
+      product: product.value,
+      price: price.value
+    });
     savedName.value = name.value;
     savedProduct.value = product.value;
     savedPrice.value = price.value;
@@ -77,8 +82,7 @@ function addBreakfast(){
     name.value = "";
     product.value = "";
     price.value = null;
-
-    return savedName; //Eingegebene Daten an Datenbank weiterleiten
+    return;
   }
   return alert("Bitte alle Felder befüllen.");
 }
@@ -93,8 +97,7 @@ table {
 }
 
 .button-right {
-  margin-top: 2rem;
-  margin-left: 50rem;
+  margin-left: 95%;
   padding: 0.5rem 1rem;
   background: grey;
   color: white;
@@ -102,8 +105,8 @@ table {
 }
 
 .button-middle {
-  margin-top: 5rem;
-  margin-left: 50rem;
+  margin-top: 10rem;
+  margin-left: 50%;
   padding: 1rem 2rem;
   background: grey;
   color: white;
