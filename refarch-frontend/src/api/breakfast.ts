@@ -11,7 +11,7 @@ export interface BreakfastRequest {
 
 export function addBreakfast (
     breakfast: BreakfastRequest,): Promise<void> {
-    return fetch("breakfast", postConfig(breakfast))
+    return fetch("api/backend-service/breakfast", postConfig(breakfast))
         .then((response) => {
             defaultResponseHandler(response);
             return;
