@@ -25,8 +25,11 @@ export interface Page<T> {
 
 export function getBreakfasts(
     pageNumber = 0,
-    pageSize = 10,): Promise<Page<Breakfast>> {
-    return fetch(`api/backend-service/breakfast?pageNumber=${pageNumber}&pageSize=${pageSize}`, getConfig(),)
+    pageSize = 10
+): Promise<Page<Breakfast>> {
+    return fetch(
+        `api/backend-service/breakfast?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+        getConfig(),)
         .then((response) => {
             defaultResponseHandler(response);
             return response.json();
@@ -34,13 +37,11 @@ export function getBreakfasts(
         .catch((err) => defaultCatchHandler(err));
 }
 
-export function addBreakfast (breakfast: BreakfastRequest,): Promise<void> {
+export function addBreakfast(breakfast: BreakfastRequest,): Promise<void> {
     return fetch("api/backend-service/breakfast", postConfig(breakfast))
         .then((response) => {
             defaultResponseHandler(response);
             return;
         })
-        .catch((err) => {
-            defaultResponseHandler(err);
-        });
+        .catch((err) => defaultCatchHandler(err));
 }

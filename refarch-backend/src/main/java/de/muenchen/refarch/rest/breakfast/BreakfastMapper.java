@@ -4,7 +4,7 @@ import de.muenchen.refarch.rest.breakfast.dto.BreakfastRequestDTO;
 import de.muenchen.refarch.rest.breakfast.dto.BreakfastResponseDTO;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper (componentModel = "spring")
 public interface BreakfastMapper {
 
     BreakfastEntity toEntity(BreakfastRequestDTO breakfastRequestDTO);

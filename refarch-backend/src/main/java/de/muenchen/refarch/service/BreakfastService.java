@@ -5,7 +5,6 @@ import de.muenchen.refarch.rest.breakfast.BreakfastMapper;
 import de.muenchen.refarch.rest.breakfast.BreakfastRepository;
 import de.muenchen.refarch.rest.breakfast.dto.BreakfastRequestDTO;
 import de.muenchen.refarch.security.Authorities;
-import de.muenchen.refarch.theentity.TheEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -13,9 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
