@@ -25,10 +25,10 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>{{savedName}}</td>
-            <td>{{savedProduct}}</td>
-            <td>{{savedPrice}}</td>
+          <tr v-for="b in breakfasts" :key="b.id">
+            <td>{{b.name}}</td>
+            <td>{{b.product}}</td>
+            <td>{{b.price}}</td>
           </tr>
           <tr>
             <td><input v-model="name" placeholder="Bitte ausfüllen" /></td>
@@ -55,18 +55,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { addBreakfast as saveBreakfast } from "@/api/breakfast";
+import { addBreakfast as saveBreakfast, getBreakfasts, type Breakfast } from "@/api/breakfast";
+
 
 const { t } = useI18n();
 const name = ref("");
 const product = ref("");
 const price = ref(null);
-const savedName = ref("");
-const savedProduct = ref("");
-const savedPrice = ref(null);
+const breakfasts = ref<Breakfast[]>([]);
 
+async function loadBreakfasts() {
+  breakfasts.value = await getBreakfasts();
+}
 
 async function addBreakfast(){
   if(name.value !== "" && product.value !== "" && price.value !== null){
@@ -75,10 +77,7 @@ async function addBreakfast(){
       product: product.value,
       price: price.value
     });
-    savedName.value = name.value;
-    savedProduct.value = product.value;
-    savedPrice.value = price.value;
-
+    await loadBreakfasts();
     name.value = "";
     product.value = "";
     price.value = null;
@@ -86,6 +85,7 @@ async function addBreakfast(){
   }
   return alert("Bitte alle Felder befüllen.");
 }
+onMounted(loadBreakfasts);
 </script>
 <style>
 table {

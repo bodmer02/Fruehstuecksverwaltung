@@ -11,6 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.StreamSupport;
+
 @Service
 @RequiredArgsConstructor
 public class BreakfastService {
@@ -18,9 +21,11 @@ public class BreakfastService {
     private final BreakfastRepository breakfastRepository;
     private final BreakfastMapper breakfastMapper;
 
+    public List<BreakfastEntity> getAllBreakfasts() {
+        return StreamSupport.stream(breakfastRepository.findAll().spliterator(), false).toList();
+    }
 
-
-    public void createTestBreakfast(BreakfastRequestDTO breakfastRequestDTO) {
+    public void createBreakfast(BreakfastRequestDTO breakfastRequestDTO) {
         breakfastRepository.save(breakfastMapper.toEntity(breakfastRequestDTO));
     }
 }
