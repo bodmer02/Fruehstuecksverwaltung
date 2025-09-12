@@ -18,17 +18,23 @@ export interface Breakfast {
     price: number;
 }
 
-export function getBreakfasts(): Promise<Breakfast[]>{
-    return fetch("api/backend-service/breakfast", getConfig())
+export interface Page<T> {
+    content: T[];
+    totalElements: number;
+}
+
+export function getBreakfasts(
+    pageNumber = 0,
+    pageSize = 10,): Promise<Page<Breakfast>> {
+    return fetch(`api/backend-service/breakfast?pageNumber=${pageNumber}&pageSize=${pageSize}`, getConfig(),)
         .then((response) => {
             defaultResponseHandler(response);
-            return response.json
+            return response.json();
         })
         .catch((err) => defaultCatchHandler(err));
 }
 
-export function addBreakfast (
-    breakfast: BreakfastRequest,): Promise<void> {
+export function addBreakfast (breakfast: BreakfastRequest,): Promise<void> {
     return fetch("api/backend-service/breakfast", postConfig(breakfast))
         .then((response) => {
             defaultResponseHandler(response);

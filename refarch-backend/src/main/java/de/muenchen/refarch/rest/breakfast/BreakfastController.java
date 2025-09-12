@@ -27,8 +27,11 @@ public class BreakfastController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<BreakfastResponseDTO> getBreakfasts() {
-        return breakfastService.getAllBreakfasts().stream().map(breakfastMapper::toDTO).toList();
+    public Page<BreakfastResponseDTO> getBreakfasts(@RequestParam(defaultValue = "0") final int pageNumber,
+                                                    @RequestParam(defaultValue = "10") final int pageSize) {
+        final Page<BreakfastEntity> page = breakfastService.getAllBreakfasts(pageNumber, pageSize);
+        final List<BreakfastResponseDTO> content = page.getContent().stream().map(breakfastMapper::toDTO).toList();
+        return new PageImpl<>(content, page.getPageable(), page.getTotalElements());
     }
 
 

@@ -57,7 +57,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { addBreakfast as saveBreakfast, getBreakfasts, type Breakfast } from "@/api/breakfast";
+import { addBreakfast as saveBreakfast, getBreakfasts, type Breakfast, type Page } from "@/api/breakfast";
 
 
 const { t } = useI18n();
@@ -67,7 +67,8 @@ const price = ref(null);
 const breakfasts = ref<Breakfast[]>([]);
 
 async function loadBreakfasts() {
-  breakfasts.value = await getBreakfasts();
+  const page: Page<Breakfast> = await getBreakfasts();
+  breakfasts.value = page.content;
 }
 
 async function addBreakfast(){
@@ -75,7 +76,7 @@ async function addBreakfast(){
     await saveBreakfast({
       name: name.value,
       product: product.value,
-      price: price.value
+      price: price.value,
     });
     await loadBreakfasts();
     name.value = "";

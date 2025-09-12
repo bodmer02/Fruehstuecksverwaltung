@@ -8,6 +8,9 @@ import de.muenchen.refarch.security.Authorities;
 import de.muenchen.refarch.theentity.TheEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +24,9 @@ public class BreakfastService {
     private final BreakfastRepository breakfastRepository;
     private final BreakfastMapper breakfastMapper;
 
-    public List<BreakfastEntity> getAllBreakfasts() {
-        return StreamSupport.stream(breakfastRepository.findAll().spliterator(), false).toList();
+    public Page<BreakfastEntity> getAllBreakfasts(final int pageNumber, final int pageSize) {
+        final Pageable pageRequest = PageRequest.of(pageNumber, pageSize);
+        return breakfastRepository.findAll(pageRequest);
     }
 
     public void createBreakfast(BreakfastRequestDTO breakfastRequestDTO) {
