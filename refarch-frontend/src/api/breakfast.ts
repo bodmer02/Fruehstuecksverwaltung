@@ -4,6 +4,7 @@ import {
     getConfig,
     postConfig,
 } from "@/api/fetch-utils.ts";
+import type Breakfast from "@/types/Breakfast.ts";
 
 export interface BreakfastRequest {
     name: string;
@@ -11,12 +12,6 @@ export interface BreakfastRequest {
     price: number;
 }
 
-export interface Breakfast {
-    id: string;
-    name: string;
-    product: string;
-    price: number;
-}
 
 export interface Page<T> {
     content: T[];
