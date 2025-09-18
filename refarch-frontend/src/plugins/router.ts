@@ -4,7 +4,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import { ROUTES_GETSTARTED, ROUTES_HOME, ROUTES_INVOICE } from "@/constants";
 import GetStartedView from "@/views/GetStartedView.vue";
 import HomeView from "@/views/HomeView.vue";
-import Invoice from "@/views/Invoice.vue"
+import InvoiceView from "@/views/InvoiceView.vue"
 
 const routes = [
   {
@@ -22,7 +22,7 @@ const routes = [
   {
     path: "/invoice",
     name: ROUTES_INVOICE,
-    component: Invoice,
+    component: InvoiceView,
   },
   { path: "/:catchAll(.*)*", redirect: "/" }, // CatchAll route
 ];

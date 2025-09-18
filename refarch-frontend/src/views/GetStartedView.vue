@@ -30,34 +30,72 @@
             <td>{{b.product}}</td>
             <td>{{b.price}}</td>
           </tr>
-          <tr>
-            <td><input v-model="name" placeholder="Bitte ausfüllen" /></td>
-            <td><input v-model="product" placeholder="Bitte ausfüllen" /></td>
-            <td><input v-model.number="price" placeholder="Bitte ausfüllen" /></td>
-          </tr>
           </tbody>
         </v-table>
       </v-col>
     </v-row>
     <v-row>
-      <v-col>
-        <button class="button-right" @click="addBreakfast">
-          {{ t("views.getStarted.table.add")}}
-        </button>
-        <router-link to="/invoice">
-        <button class="button-middle">
+      <v-col >
+        <v-dialog width="500">
+          <template v-slot:activator="{ props: activatorProps }">
+            <v-btn v-bind="activatorProps">Produkt hinzufügen</v-btn>
+          </template>
+
+          <template v-slot:default="{}">
+            <v-card
+                class="mx-auto"
+                title="Produkt hinzufügen"
+            >
+              <v-container>
+                <v-text-field
+                    v-model="name"
+                    color="primary"
+                    label="Name"
+                    variant="underlined"
+                ></v-text-field>
+
+                <v-text-field
+                    v-model="product"
+                    color="primary"
+                    label="Produkt"
+                    variant="underlined"
+                ></v-text-field>
+
+                <v-number-input
+                    v-model= "price" :precision="2"
+                    hide-details="auto"></v-number-input>
+              </v-container>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+
+                <v-btn color="success" @click="addBreakfast">
+                  Produkt hinzufügen
+
+                  <v-icon icon="mdi-chevron-right" end></v-icon>
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </template>
+        </v-dialog>
+      </v-col>
+      <v-col cols="auto">
+        <v-btn :to="ROUTES_INVOICE">
           Zur Abrechnung
-        </button>
-        </router-link>
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import { useI18n } from "vue-i18n";
-import { addBreakfast as saveBreakfast, getBreakfasts, type Breakfast, type Page } from "@/api/breakfast";
+import {onMounted, ref} from "vue";
+import {useI18n} from "vue-i18n";
+import {addBreakfast as saveBreakfast, type Breakfast, getBreakfasts, type Page} from "@/api/breakfast";
+import {useSnackbarStore} from "@/stores/snackbar.ts";
+import {ROUTES_INVOICE, STATUS_INDICATORS} from "@/constants.ts";
 
 
 const { t } = useI18n();
@@ -65,6 +103,7 @@ const name = ref("");
 const product = ref("");
 const price = ref(null);
 const breakfasts = ref<Breakfast[]>([]);
+const snackbarStore = useSnackbarStore();
 
 async function loadBreakfasts() {
   const page: Page<Breakfast> = await getBreakfasts();
@@ -84,7 +123,7 @@ async function addBreakfast(){
     price.value = null;
     return;
   }
-  return alert("Bitte alle Felder befüllen.");
+  snackbarStore.showMessage({message: "Bitte alle Felder befüllen!", level: STATUS_INDICATORS.WARNING}) //TODO: replace with vcalidation
 }
 onMounted(loadBreakfasts);
 </script>
@@ -98,7 +137,7 @@ table {
 }
 
 .button-right {
-  margin-left: 95%;
+  margin-left: 87%;
   padding: 0.5rem 1rem;
   background: grey;
   color: white;
@@ -106,7 +145,7 @@ table {
 }
 
 .button-middle {
-  margin-top: 10rem;
+  margin-top: 5rem;
   margin-left: 50%;
   padding: 1rem 2rem;
   background: grey;
