@@ -1,4 +1,4 @@
-export default interface Breakfast {
+export default interface Product {
     id: string;
     name: string;
     product: string;

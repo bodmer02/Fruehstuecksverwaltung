@@ -13,11 +13,9 @@ import lombok.*;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class BreakfastEntity extends BaseEntity {
+public class ProductEntity extends BaseEntity {
 
-    @ManyToOne
-    @JoinColumn(name = "name", referencedColumnName = "name")
-    private UserEntity user;
+    private String userName;
 
     @Column(nullable = false, length = 50)
     @NotNull @Size(min = 1, max = 50) private String name;

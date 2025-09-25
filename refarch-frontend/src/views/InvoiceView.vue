@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
-import {getBreakfasts, type Page} from "@/api/breakfast.ts";
-import type Breakfast from "@/types/Breakfast.ts";
+import {getBreakfasts, type Page} from "@/api/product.ts";
+import type Product from "@/types/Product.ts";
 
-const breakfasts = ref<Breakfast[]>([]);
+const breakfasts = ref<Product[]>([]);
 
 const search = ref("");
 const headers = [
@@ -46,7 +46,7 @@ const uebersicht = [
 ]
 
 function loadBreakfasts() {
-  getBreakfasts().then((content: Page<Breakfast>) => (breakfasts.value = content.content));
+  getBreakfasts().then((content: Page<Product>) => (breakfasts.value = content.content));
 }
 
 onMounted(loadBreakfasts);

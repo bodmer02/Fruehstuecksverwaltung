@@ -93,8 +93,8 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import {useI18n} from "vue-i18n";
-import {addBreakfast as saveBreakfast, getBreakfasts, type Page} from "@/api/breakfast";
-import type Breakfast from "@/types/Breakfast.ts";
+import {addBreakfast as saveBreakfast, getBreakfasts, type Page} from "@/api/product.ts";
+import type Product from "@/types/Product.ts";
 import {useSnackbarStore} from "@/stores/snackbar.ts";
 import {ROUTES_INVOICE, STATUS_INDICATORS} from "@/constants.ts";
 
@@ -103,11 +103,11 @@ const { t } = useI18n();
 const name = ref("");
 const product = ref("");
 const price = ref(null);
-const breakfasts = ref<Breakfast[]>([]);
+const breakfasts = ref<Product[]>([]);
 const snackbarStore = useSnackbarStore();
 
 async function loadBreakfasts() {
-  const page: Page<Breakfast> = await getBreakfasts();
+  const page: Page<Product> = await getBreakfasts();
   breakfasts.value = page.content;
 }
 

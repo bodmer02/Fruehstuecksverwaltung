@@ -20,15 +20,14 @@ import java.util.Set;
 @NoArgsConstructor
 public class UserEntity extends BaseEntity {
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    private Set<BreakfastEntity> breakfastEntities;
+    @OneToMany
+    private Set<ProductEntity> productEntities;
 
     @Column(nullable = false, length = 50)
     @NotNull @Size(min = 1, max = 50) private String name;
 
     @Column(nullable = false, length = 50)
-    @NotNull @Size(min = 1, max = 50) private String id;
+    @NotNull @Size(min = 1, max = 50) private String userId;
 
 }
 

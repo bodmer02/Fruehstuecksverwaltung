@@ -4,7 +4,7 @@ import {
     getConfig,
     postConfig,
 } from "@/api/fetch-utils.ts";
-import type Breakfast from "@/types/Breakfast.ts";
+import type Product from "@/types/Product.ts";
 
 export interface BreakfastRequest {
     name: string;
@@ -21,7 +21,7 @@ export interface Page<T> {
 export function getBreakfasts(
     pageNumber = 0,
     pageSize = 10
-): Promise<Page<Breakfast>> {
+): Promise<Page<Product>> {
     return fetch(
         `api/backend-service/breakfast?pageNumber=${pageNumber}&pageSize=${pageSize}`,
         getConfig(),)
