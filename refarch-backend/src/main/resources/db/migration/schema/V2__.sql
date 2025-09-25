@@ -1,10 +1,10 @@
 CREATE TABLE product_entity
 (
-    id        UUID             NOT NULL,
-    user_name VARCHAR(255),
-    name      VARCHAR(50)      NOT NULL,
-    product   VARCHAR(50)      NOT NULL,
-    price     DOUBLE PRECISION NOT NULL,
+    id      UUID             NOT NULL,
+    user_id UUID,
+    name    VARCHAR(50)      NOT NULL,
+    product VARCHAR(50)      NOT NULL,
+    price   DOUBLE PRECISION NOT NULL,
     CONSTRAINT pk_productentity PRIMARY KEY (id)
 );
 
@@ -32,6 +32,9 @@ CREATE TABLE user_entity_product_entities
 
 ALTER TABLE user_entity_product_entities
     ADD CONSTRAINT uc_user_entity_product_entities_productentities UNIQUE (product_entities_id);
+
+ALTER TABLE product_entity
+    ADD CONSTRAINT FK_PRODUCTENTITY_ON_USER FOREIGN KEY (user_id) REFERENCES user_entity (id);
 
 ALTER TABLE user_entity_product_entities
     ADD CONSTRAINT fk_useentproent_on_product_entity FOREIGN KEY (product_entities_id) REFERENCES product_entity (id);

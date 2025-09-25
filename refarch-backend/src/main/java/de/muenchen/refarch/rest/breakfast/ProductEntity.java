@@ -15,7 +15,8 @@ import lombok.*;
 @NoArgsConstructor
 public class ProductEntity extends BaseEntity {
 
-    private String userName;
+    @ManyToOne
+    private UserEntity user;
 
     @Column(nullable = false, length = 50)
     @NotNull @Size(min = 1, max = 50) private String name;

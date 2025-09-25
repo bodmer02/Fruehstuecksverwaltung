@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -21,7 +22,7 @@ import java.util.Set;
 public class UserEntity extends BaseEntity {
 
     @OneToMany
-    private Set<ProductEntity> productEntities;
+    private Set<ProductEntity> productEntities = new HashSet<>();
 
     @Column(nullable = false, length = 50)
     @NotNull @Size(min = 1, max = 50) private String name;
