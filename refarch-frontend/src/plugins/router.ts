@@ -4,7 +4,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import { ROUTES_GETSTARTED, ROUTES_HOME, ROUTES_INVOICE } from "@/constants";
 import GetStartedView from "@/views/GetStartedView.vue";
 import HomeView from "@/views/HomeView.vue";
-import InvoiceView from "@/views/InvoiceView.vue"
+import InvoiceView from "@/views/InvoiceView.vue";
 
 const routes = [
   {

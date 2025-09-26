@@ -18,27 +18,52 @@
           <span :class="status">{{ status }}</span>
         </p>
         <router-link to="/getstarted">
-          <button>
-            Zur Frühstücksplanung
-          </button>
+          <button>Zur Frühstücksplanung</button>
         </router-link>
+        <v-data-table-server
+          :headers="headers"
+          :items="users"
+          :items-length="totalItems"
+          :loading="loading"
+          item-value="name"
+          @update:options = "loadUsers"
+        ></v-data-table-server>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script setup lang="ts">
+import type User2 from "@/types/User2.ts";
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 import { checkHealth } from "@/api/health-client";
 import { useSnackbarStore } from "@/stores/snackbar";
 import HealthState from "@/types/HealthState";
+import {getUsers, type Page} from "@/api/user.ts";
+
 
 const { t } = useI18n();
 
 const snackbarStore = useSnackbarStore();
 const status = ref("DOWN");
+
+
+
+const headers = ref([
+  { title: 'ID'},
+  { title: 'Name'},
+])
+const users = ref<User2[]>([]);
+const loading = ref(true)
+const totalItems = ref(0)
+
+async function loadUsers () {
+  const page: Page<User2> = await getUsers();
+  users.value = page.content;
+
+}
 
 onMounted(() => {
   checkHealth()

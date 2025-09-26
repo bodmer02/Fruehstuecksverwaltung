@@ -1,4 +1,4 @@
-class User {
+/*class User {
   sub = "";
 
   // LHM
@@ -31,3 +31,4 @@ export function UserLocalDevelopment(): User {
 }
 
 export default User;
+*/

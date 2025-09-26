@@ -1,4 +1,4 @@
-import type Product from "@/types/Product.ts";
+import type User from "@/types/User2.ts";
 
 import {
   defaultCatchHandler,
@@ -7,10 +7,8 @@ import {
   postConfig,
 } from "@/api/fetch-utils.ts";
 
-export interface BreakfastRequest {
+export interface UserRequest {
   name: string;
-  product: string;
-  price: number;
 }
 
 export interface Page<T> {
@@ -18,12 +16,9 @@ export interface Page<T> {
   totalElements: number;
 }
 
-export function getBreakfasts(
-  pageNumber = 0,
-  pageSize = 10
-): Promise<Page<Product>> {
+export function getUsers(pageNumber = 0, pageSize = 10): Promise<Page<User>> {
   return fetch(
-    `api/backend-service/product?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+    `api/backend-service/user?pageNumber=${pageNumber}&pageSize=${pageSize}`,
     getConfig()
   )
     .then((response) => {
@@ -33,8 +28,8 @@ export function getBreakfasts(
     .catch((err) => defaultCatchHandler(err));
 }
 
-export function addBreakfast(breakfast: BreakfastRequest): Promise<void> {
-  return fetch("api/backend-service/product", postConfig(breakfast))
+export function addUser(user: UserRequest): Promise<void> {
+  return fetch("api/backend-service/user", postConfig(user))
     .then((response) => {
       defaultResponseHandler(response);
       return;

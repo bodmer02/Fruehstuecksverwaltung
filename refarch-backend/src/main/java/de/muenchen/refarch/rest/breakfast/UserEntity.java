@@ -27,9 +27,6 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false, length = 50)
     @NotNull @Size(min = 1, max = 50) private String name;
 
-    @Column(nullable = false, length = 50)
-    @NotNull @Size(min = 1, max = 50) private String userId;
-
 }
 
 

@@ -12,30 +12,33 @@
       <v-col>
         <v-table>
           <thead>
-          <tr>
-          <th>
-            {{ t("views.getStarted.table.name")}}
-          </th>
-          <th>
-            {{ t("views.getStarted.table.product")}}
-          </th>
-          <th>
-            {{ t("views.getStarted.table.price")}}
-          </th>
-          </tr>
+            <tr>
+              <th>
+                {{ t("views.getStarted.table.name") }}
+              </th>
+              <th>
+                {{ t("views.getStarted.table.product") }}
+              </th>
+              <th>
+                {{ t("views.getStarted.table.price") }}
+              </th>
+            </tr>
           </thead>
           <tbody>
-          <tr v-for="b in breakfasts" :key="b.id">
-            <td>{{b.name}}</td>
-            <td>{{b.product}}</td>
-            <td>{{b.price}}</td>
-          </tr>
+            <tr
+              v-for="b in breakfasts"
+              :key="b.id"
+            >
+              <td>{{ b.name }}</td>
+              <td>{{ b.product }}</td>
+              <td>{{ b.price }}</td>
+            </tr>
           </tbody>
         </v-table>
       </v-col>
     </v-row>
     <v-row>
-      <v-col >
+      <v-col>
         <v-dialog width="500">
           <template v-slot:activator="{ props: activatorProps }">
             <v-btn v-bind="activatorProps">Produkt hinzufügen</v-btn>
@@ -43,27 +46,29 @@
 
           <template v-slot:default="{}">
             <v-card
-                class="mx-auto"
-                title="Produkt hinzufügen"
+              class="mx-auto"
+              title="Produkt hinzufügen"
             >
               <v-container>
                 <v-text-field
-                    v-model="name"
-                    color="primary"
-                    label="Name"
-                    variant="underlined"
+                  v-model="name"
+                  color="primary"
+                  label="Name"
+                  variant="underlined"
                 ></v-text-field>
 
                 <v-text-field
-                    v-model="product"
-                    color="primary"
-                    label="Produkt"
-                    variant="underlined"
+                  v-model="product"
+                  color="primary"
+                  label="Produkt"
+                  variant="underlined"
                 ></v-text-field>
 
                 <v-number-input
-                    v-model= "price" :precision="2"
-                    hide-details="auto"></v-number-input>
+                  v-model="price"
+                  :precision="2"
+                  hide-details="auto"
+                ></v-number-input>
               </v-container>
 
               <v-divider></v-divider>
@@ -71,10 +76,16 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
 
-                <v-btn color="success" @click="addBreakfast">
+                <v-btn
+                  color="success"
+                  @click="addBreakfast"
+                >
                   Produkt hinzufügen
 
-                  <v-icon icon="mdi-chevron-right" end></v-icon>
+                  <v-icon
+                    icon="mdi-chevron-right"
+                    end
+                  ></v-icon>
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -82,22 +93,22 @@
         </v-dialog>
       </v-col>
       <v-col cols="auto">
-        <v-btn :to="ROUTES_INVOICE">
-          Zur Abrechnung
-        </v-btn>
+        <v-btn :to="ROUTES_INVOICE"> Zur Abrechnung </v-btn>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
-import {useI18n} from "vue-i18n";
-import {addBreakfast as saveBreakfast, getBreakfasts, type Page} from "@/api/product.ts";
+import type { Page } from "@/api/product.ts";
 import type Product from "@/types/Product.ts";
-import {useSnackbarStore} from "@/stores/snackbar.ts";
-import {ROUTES_INVOICE, STATUS_INDICATORS} from "@/constants.ts";
 
+import { onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
+
+import { getBreakfasts, addBreakfast as saveBreakfast } from "@/api/product.ts";
+import { ROUTES_INVOICE, STATUS_INDICATORS } from "@/constants.ts";
+import { useSnackbarStore } from "@/stores/snackbar.ts";
 
 const { t } = useI18n();
 const name = ref("");
@@ -111,8 +122,8 @@ async function loadBreakfasts() {
   breakfasts.value = page.content;
 }
 
-async function addBreakfast(){
-  if(name.value !== "" && product.value !== "" && price.value !== null){
+async function addBreakfast() {
+  if (name.value !== "" && product.value !== "" && price.value !== null) {
     await saveBreakfast({
       name: name.value,
       product: product.value,
@@ -124,7 +135,10 @@ async function addBreakfast(){
     price.value = null;
     return;
   }
-  snackbarStore.showMessage({message: "Bitte alle Felder befüllen!", level: STATUS_INDICATORS.WARNING}) //TODO: replace with vcalidation
+  snackbarStore.showMessage({
+    message: "Bitte alle Felder befüllen!",
+    level: STATUS_INDICATORS.WARNING,
+  }); //TODO: replace with vcalidation
 }
 onMounted(loadBreakfasts);
 </script>

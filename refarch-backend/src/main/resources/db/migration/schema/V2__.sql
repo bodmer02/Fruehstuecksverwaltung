@@ -17,9 +17,8 @@ CREATE TABLE the_entity
 
 CREATE TABLE user_entity
 (
-    id      UUID        NOT NULL,
-    name    VARCHAR(50) NOT NULL,
-    user_id VARCHAR(50) NOT NULL,
+    id   UUID        NOT NULL,
+    name VARCHAR(50) NOT NULL,
     CONSTRAINT pk_userentity PRIMARY KEY (id)
 );
 

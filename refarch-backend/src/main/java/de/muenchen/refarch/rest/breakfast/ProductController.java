@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/breakfast")
+@RequestMapping("/product")
 public class ProductController {
 
     private final ProductService productService;
